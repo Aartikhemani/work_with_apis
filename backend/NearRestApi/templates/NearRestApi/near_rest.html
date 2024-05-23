@@ -1,0 +1,48 @@
+<!-- nearby_restaurants.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Nearby Restaurants</title>
+</head>
+<body>
+    <h1>Find Nearby Restaurants</h1>
+    <form id="restaurant-form">
+        <label for="place_name">Place Name:</label>
+        <input type="text" id="place_name" name="place_name" required><br><br>
+
+        <label for="cuisine_type">Cuisine Type:</label>
+        <input type="text" id="cuisine_type" name="cuisine_type"><br><br>
+
+        <button type="button" onclick="fetchRestaurants()">Find Restaurants</button>
+    </form>
+    <h2>Results:</h2>
+    <div id="results"></div>
+
+    <script>
+        function fetchRestaurants() {
+            const placeName = document.getElementById('place_name').value;
+            const cuisineType = document.getElementById('cuisine_type').value;
+            const url = `/NearRestApi/api/nearby_restaurants?place_name=${placeName}&cuisine_type=${cuisineType}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    let resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = '';
+                    if (data.length) {
+                        data.forEach((restaurant, index) => {
+                            resultsDiv.innerHTML += `<p>${index + 1}. <strong>${restaurant.name}</strong><br>Rating: ${restaurant.rating}<br>Address: ${restaurant.vicinity}</p>`;
+                        });
+                    } else {
+                        resultsDiv.innerHTML = '<p>No restaurants found.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
