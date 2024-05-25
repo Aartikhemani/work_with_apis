@@ -8,7 +8,8 @@ This project uses the Google API to provide certain functionalities.
 
 1. Clone the repository.
 2. Create a `.env` file in the `backend` directory (where `manage.py` is located) and add your Google API key:
-3. Create a virtual environment and install the required packages:
+3. In case you want help to get Google API key- https://www.youtube.com/watch?v=OGTG1l7yin4
+4. Create a virtual environment and install the required packages:
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
