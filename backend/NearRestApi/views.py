@@ -7,26 +7,10 @@ from .serializers import RestaurantSerializer
 from django.shortcuts import render
 
 
-# class NearbyRestaurantsView(APIView):
-#     def get(self, request):
-#         latitude = request.query_params.get('latitude')
-#         longitude = request.query_params.get('longitude')
-#         cuisine_type = request.query_params.get('cuisine_type')
-#
-#         if not latitude or not longitude:
-#             return Response({"error": "Please provide latitude and longitude"}, status=status.HTTP_400_BAD_REQUEST)
-#
-#         gmaps = googlemaps.Client(key=settings.GOOGLE_API_KEY)
-#         places = gmaps.places_nearby(location=(latitude, longitude), radius=5000, type='restaurant',
-#                                      keyword=cuisine_type)
-#
-#         restaurants = []
-#         for place in places['results']:
-#             serializer = RestaurantSerializer(data=place)
-#             if serializer.is_valid():
-#                 restaurants.append(serializer.data)
-#
-#         return Response(restaurants, status=status.HTTP_200_OK)
+def home(request):
+    return render(request, 'NearRestApi/home.html')
+
+
 class NearbyRestaurantsView(APIView):
     def get(self, request):
         try:
@@ -47,9 +31,10 @@ class NearbyRestaurantsView(APIView):
                 return Response({"error": "Could not geocode the provided place name"},
                                 status=status.HTTP_400_BAD_REQUEST)
 
-            location = geocode_result[0]['geometry']['location']  #retrieves the location information including latitude and longitude.
-            latitude = location['lat']    #extracts the latitude value.
-            longitude = location['lng']   # extracts the longitude value.
+            location = geocode_result[0]['geometry'][
+                'location']  # retrieves the location information including latitude and longitude.
+            latitude = location['lat']  # extracts the latitude value.
+            longitude = location['lng']  # extracts the longitude value.
 
             # Fetch nearby places using latitude and longitude
             places = gmaps.places_nearby(location=(latitude, longitude), radius=5000, type='restaurant',

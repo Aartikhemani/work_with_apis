@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # Other Apps
+    'MainApp',
     'NearRestApi',
+    'NutritionApi',
+    'NewsApi',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +133,7 @@ load_dotenv()
 
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 # print(GOOGLE_API_KEY)
+
+#spoonacular
+SPOONACULAR_API_KEY = os.getenv('SPOONACULAR_API_KEY')
+CALORIES_NINJA_API_KEY = os.getenv('CALORIES_NINJA_API_KEY')

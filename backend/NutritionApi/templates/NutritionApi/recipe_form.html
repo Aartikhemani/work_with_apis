@@ -1,0 +1,15 @@
+<!-- NutritionApi/templates/NutritionApi/recipe_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Form</title>
+</head>
+<body>
+    <h1>Add a New Recipe</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
