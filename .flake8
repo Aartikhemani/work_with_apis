@@ -1,0 +1,2 @@
+max-line-length = 88  # Maximum line length to enforce
+ignore = E203, E266, E501, W503  # Ignore specific warnings
