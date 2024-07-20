@@ -1,0 +1,30 @@
+name: Code Quality
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install flake8 black mypy  # Install code quality tools
+
+    - name: Lint code with flake8
+      run: flake8 .  # Run flake8 to check for style issues
+    
+    - name: Format code with black
+      run: black --check .  # Check code formatting with black
+
+    - name: Type check with mypy
+      run: mypy .  # Perform static type checking with mypy
