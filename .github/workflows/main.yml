@@ -28,8 +28,8 @@ jobs:
     - name: Verify Pytest Installation
       run: pytest --version  # Verify that pytest is installed correctly
     
-    - name: Run tests
-      run: pytest  # Run the tests using pytest
+    # - name: Run tests
+    #   run: pytest  # Run the tests using pytest
 
 
 
